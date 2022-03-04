@@ -1,0 +1,1 @@
+alter table BUS_TICKETS ADD TCKN VARCHAR(11);

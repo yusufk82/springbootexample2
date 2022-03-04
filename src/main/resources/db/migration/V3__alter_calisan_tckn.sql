@@ -1,0 +1,1 @@
+alter table CALISANLAR ADD TCKN VARCHAR(11);

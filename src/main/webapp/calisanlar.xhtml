@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="utility/general_template.xhtml">
+
+    <ui:define name="content">
+<f:view></f:view>
+<h:form id="form" prependId="false">
+
+
+        <p:growl showDetail="true" id="mesaj"></p:growl>
+
+        <p:panel>
+            <f:facet name="header">Çalışan Ekle</f:facet>
+
+            <p:panelGrid columns="3">
+
+                <h:outputText value="T.C. Kimlik Numarası"></h:outputText>
+                <p:inputText id="txtTckn" value="#{calisanController.calisan.tckn}">
+                    <f:validator binding="#{tcknValidator}" />
+                </p:inputText>
+                <h:message for="txtTckn" />
+
+                <h:outputText value="Adı"></h:outputText>
+                <p:inputText id="txtAdi" value="#{calisanController.calisan.isim}"></p:inputText>
+                <h:message for="txtAdi" />
+
+                <h:outputText value="Soyadı"></h:outputText>
+                <p:inputText id="txtSoyadi" value="#{calisanController.calisan.soyisim}"></p:inputText>
+                <h:message for="txtSoyadi" />
+
+                <h:outputText value="Maaş"></h:outputText>
+                <p:inputText id="txtMaas" value="#{calisanController.calisan.maas}" required="true"></p:inputText>
+                <h:message for="txtMaas" />
+
+
+                <h:outputText value="İşe Giriş Tarihi"></h:outputText>
+                <p:datePicker id="dateIseGirisTarihi" value="#{calisanController.calisan.iseGirisTarihi}" required="true"></p:datePicker>
+                <h:message for="dateIseGirisTarihi" />
+
+
+            </p:panelGrid>
+
+            <p:commandButton id="btnKaydet" action="#{calisanController.kaydet}" value="Kaydet" update="form,dtCalisanlar" ></p:commandButton>
+
+        </p:panel>
+
+
+</h:form>
+
+        <p:dataTable value="#{calisanController.calisanList}"
+                     var="calisan" rows="10" paginator="true" id="dtCalisanlar">
+
+            <p:column headerText="Çalışan ID">
+                <h:outputText value="#{calisan.calisanID}" />
+            </p:column>
+
+
+            <p:column headerText="Adı">
+                <h:outputText value="#{calisan.isim}" />
+            </p:column>
+
+
+            <p:column headerText="Soyadı">
+                <h:outputText value="#{calisan.soyisim}" />
+            </p:column>
+
+            <p:column headerText="Maaş">
+                <h:outputText value="#{calisan.maas}" />
+            </p:column>
+
+            <p:column headerText="İşe Giriş Tarihi">
+                <h:outputText value="#{calisan.iseGirisTarihi}" />
+            </p:column>
+
+
+
+            <p:column headerText="Edit">
+
+                <p:commandButton icon="pi pi-pencil"
+                                 action="#{busTicketController.edit(busTicket)}"
+                                 process="@this" />
+
+            </p:column>
+
+        </p:dataTable>
+
+    </ui:define>
+
+</ui:composition>
+
+</html>
